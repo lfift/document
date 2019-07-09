@@ -1,0 +1,26 @@
+#Deployment资源清单
+apiVersion: apps/v1
+metadata:
+    name: 
+    namespace:
+    labels: 
+        key1: value1
+        keyn: valuen
+spec:
+    replicas:
+    selector:
+        matchLabels:
+        matchExpressions:
+    revisionHistoryLimit: #保存历史版本数，默认为10
+    template:
+        metadata:
+            labels:
+                key1: value1
+                keyn: valuen
+        spec:
+    strategy: #更新策略
+        rollingPolicy: #滚动更新策略，只有type为RollingUpdate时该字段才有效
+            maxSurge: #可超出当前个数的值，如：当前为5个Pod，该值设为1则最多可存在6个
+            maxUnavaible: #最多不可用数，如：当前为5个Pod，该值设为0则更新过程中至少存活5个
+        type: #更新方式：Recreate（全部删除重新创建）|RollingUpdate（滚动更新，默认值）
+              

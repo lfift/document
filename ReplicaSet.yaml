@@ -1,0 +1,28 @@
+#ReplicaSet资源清单
+apiVersion: apps/v1 #使用kubectl explain rs查看版本，注：文档版本是落后于k8s版本的
+kind: ReplicaSet
+metadata:
+    name: 
+    namespace:
+    labels:
+        key1: value1
+        keyn: valuen
+spec:
+    replicas: #副本数，就是启动的Pod数量
+    selector: #标签选择器，用于选择受该控制器控制的Pod，两种匹配方式matchLabels和matchExpressions
+        matchLabels:
+            key1: value1 
+            key2: value2
+            keyn: valuen
+        matchExpressions:
+        -   key: key1
+            operator: #操作符
+            values: ["value1",...,valuen]
+    template: #指定受该控制器管理的Pod的模板
+        metadata: #元数据，metadata下的name和namespace不用指定，因为会和控制器保持一致，其中name为控制器的name-随机字符串
+            labels: #指定Pod的标签，标签一定要能够匹配上控制器的标签选择器
+                key1: value1
+                key2: value2
+                keyn: valuen
+        spec: #参照Pod.yaml中的spec
+            

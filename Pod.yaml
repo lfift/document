@@ -1,5 +1,5 @@
 #Pod资源清单，使用命令kubectl explain Pod可以查看具体的参数信息，查看apiVersion：kubectl explain Pod.apiVersion
-apiVersion: #可使用kubectl api-versions命令查看支持的api版本
+apiVersion: v1 #使用kubectl explain rs查看版本，注：文档版本是落后于k8s版本的
 kind: Pod #指定资源清单的类型Pod|Deployment...
 metadata: #定义元数据
     name: #Pod名称
@@ -29,7 +29,7 @@ spec: #期望达到的Pod状态，启动Pod时Pod会自动不断地向该状态�
       args: ["..."] #作为参数传递给command，对应Dockerfile中的CMD，command、args、ENTRYPOINT、CMD关系参见：https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
       args:
         - "..."
-      livenessProbe: #容器存活性探测共三种方式任选其一，如果探测失败则会通知kubelet根据容器的重启策略来（restartPolicy）重启容器：ExecAction：exec|TCPSocketAction：tcpSocket|HTTPGetAction：httpGet
+      livenessProbe: #容器存活性探测共三种方式任选其一，【该项非必选项但必须配置】，如果探测失败则会通知kubelet根据容器的重启策略来（restartPolicy）重启容器：ExecAction：exec|TCPSocketAction：tcpSocket|HTTPGetAction：httpGet
         exec: #指定命令方式
             command: ["/bin/sh", "-c", "..."] #指定运行的指令，返回0即为存活/健康，非0即为不健康，默认不会运行在/bin/sh中
         httpGet: #通过http的Get请求来确认是否存活，返回状态码在[200-400)之间即存活
@@ -42,7 +42,7 @@ spec: #期望达到的Pod状态，启动Pod时Pod会自动不断地向该状态�
             host: #同httpGet
             port: #同httpGet
         initialDelaySeconds: #指定执行探测的时间延迟，容器启动并不代表容器内运行的程序已经启动完成
-        timeoutSecond: #探测超时时间，超过该时间认为探测失败，默认为1秒，最小值为1秒
+        timeoutSeconds: #探测超时时间，超过该时间认为探测失败，默认为1秒，最小值为1秒
         periodSeconds: #探测间隔时间，默认为10秒最小为1秒
       readinessProbe: #就绪性探测，用于探测容器是否准备就绪，三种方式同livenessProbe，【该项非必选项但必须配置】，Pod启动后如果不做就绪性探测，它会马上挂载到Service上，如果此时容器内服务还未启动完成则会有大量请求到该Pod，导致请求失败
       lifecycle: #生命周期管理

@@ -13,6 +13,7 @@ spec:
     clusterIP: #集群内IP地址，不指定则随机分配，一般不指定，如果指定为None则不会分配IP地址，该svc将直接将请求调度至后端Pod
     type: #类型ExternalName（使用集群外部服务）|ClusterIP（集群内IP地址，默认值）|NodePort（节点IP）|LoadBalancer（云环境才能用到）
     prots:
-    - port: #Service的端口
+    - name:
+      port: #Service的端口
       targetPort: #Pod的端口
       nodePort: #主机端口，只有type为NodePort时才有用，不指定则随机分配30000-32768之间的端口

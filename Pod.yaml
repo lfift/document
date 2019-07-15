@@ -48,8 +48,21 @@ spec: #期望达到的Pod状态，启动Pod时Pod会自动不断地向该状态�
       lifecycle: #生命周期管理
         postStart: #容器运行之前执行方式：exec|httpGet|tcpSocket
         preStop: #容器关闭之前执行，参数同postStart
+      volumeMounts: #指定容器内的挂载卷
+      - name: #指定volumes下挂载卷的名字
+        mountPath: #指定容器内的挂载目录
     nodeSelector: #指定选择Pod所在节点的标签，k8s中Pod、Node、Development。。。都可以打标签
         key1: value1
         key2: value2
         keyn: valuen
+    volumes: #定义存储卷
+    - name: #存储卷名字，required，可挂载的存储卷类型使用命令：kubectl explain pods.spec.volumes查看
+      emptyDir: {} #空目录
+      hostPath: #挂载到宿主机指定目录
+        path: #指定宿主机路径，required
+        type: #指定类型，默认为""，详情见：https://kubernetes.io/docs/concepts/storage/volumes#hostpath、
+      nfs: #使用nfs挂载目录、
+       path: #nfs服务暴露的目录，required
+       server: #nfs服务所在主机，required
+       readOnly: #是否只读，默认为false
 status: #Pod当前状态，不用配置，该项为只读项

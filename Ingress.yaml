@@ -13,8 +13,9 @@ spec:
     - http:
         paths: #请求路径
         - path: #匹配路径，必须以/开头，不指定则为/
-          backend: #后端服务【必选】        
+          backend: #后端服务【必选】
+            serverName:
+            serverPort:
     tls: #如要要将服务暴露为https则使用该选项
     - hosts: #指定证书中的域名，可指定多个
       secretName: #证书名字，该处无法直接使用证书，需要将证书转换为secret资源，这里指定该资源的名称
-    

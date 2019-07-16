@@ -65,4 +65,7 @@ spec: #期望达到的Pod状态，启动Pod时Pod会自动不断地向该状态�
        path: #nfs服务暴露的目录，required
        server: #nfs服务所在主机，required
        readOnly: #是否只读，默认为false
+    - name: #使用pvc方式
+      persistentVolumeClaim:
+        claimName: #PVC名字，PVC定义参见pvc.yaml
 status: #Pod当前状态，不用配置，该项为只读项

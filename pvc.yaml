@@ -1,0 +1,13 @@
+#定义pvc
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: 
+    namespace: 
+spec:
+    accessModes: ["ReadWriteMany", "ReadWriteOnce", "ReadOnlyMany"] #共三种方式，详情：https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes
+    resources:
+        requests:
+            storage: 2Gi #要求的存储大小
+    selector: #定义标签选择器，方式同Pod.yaml
+ 

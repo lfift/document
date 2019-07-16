@@ -1,0 +1,11 @@
+#定义PV，pv不用指定namespace该资源属于集群级资源
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+    name:
+    labels: #定义labels，pvc可通过pv的标签来选择使用pv
+spec:
+    accessModes: ["ReadWriteMany", "ReadWriteOnce", "ReadOnlyMany"] #共三种方式，详情：https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes
+    capacity:
+        storage: #存储大小
+    nfs: #定义该pv使用nfs作为存储卷，所有方式参见：kubectl explain pv.spec

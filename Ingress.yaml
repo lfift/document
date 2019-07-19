@@ -1,21 +1,22 @@
 apiVersion: extensions/v1beta1
+kind: Ingress
 metadata:
 	name:
 	namespace:
     annotations:
-     kubernetes.io/Ingress.class: "nginx" #用于明确指定Ingress使用的是nginx代理，可以使用Nginx|Traffic|Envoy
+     kubernetes.io/ingress.class: "nginx" #用于明确指定Ingress使用的是nginx代理，可以使用Nginx|Traffic|Envoy
 spec:
     backend: #用于定义默认的后端，如果没有任何规则匹配就代理到该后端，如404。。。
         serverName: #服务名，【必选】
         serverPort: #服务端口，【必选】
     rules: #定义匹配规则，共host和http两种方式
     - host: #主机名
-    - http:
+      http:
         paths: #请求路径
         - path: #匹配路径，必须以/开头，不指定则为/
           backend: #后端服务【必选】
-            serverName:
-            serverPort:
+            serviceName:
+            servicePort:
     tls: #如要要将服务暴露为https则使用该选项
     - hosts: #指定证书中的域名，可指定多个
       secretName: #证书名字，该处无法直接使用证书，需要将证书转换为secret资源，这里指定该资源的名称

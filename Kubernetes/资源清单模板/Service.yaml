@@ -12,7 +12,7 @@ spec:
     sessionAffinity: #负载方式，ClientIP（根据访问地址来确定负载到哪一个Pod，类似nginx的IP_HASH）|None(随机，默认值)
     clusterIP: #集群内IP地址，不指定则随机分配，一般不指定，如果指定为None则不会分配IP地址，该svc将直接将请求调度至后端Pod
     type: #类型ExternalName（使用集群外部服务）|ClusterIP（集群内IP地址，默认值）|NodePort（节点IP）|LoadBalancer（云环境才能用到）
-    prots:
+    ports:
     - name:
       port: #Service的端口
       targetPort: #Pod的端口
